@@ -18,7 +18,7 @@ app.get('/', function(req, res) {
 	res.render('index');
 });
 
-// chat for server
+// chat for server-client
 var io = require('socket.io').listen(server);
 // when client connecting
 io.on('connection', function(socket) {
@@ -28,9 +28,8 @@ io.on('connection', function(socket) {
     socket.on('chat', function(message) {
         // display to output
         console.log(message);
+        io.emit('chat', message);
 	});
 });
-
-// client side
 
 //end ----
